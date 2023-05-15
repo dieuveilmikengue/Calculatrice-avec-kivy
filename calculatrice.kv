@@ -1,0 +1,155 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<BouttonBlanc@Button>:
+    font_size: 25
+    background_color: 0,0,0,0
+    color: 0 , 0 , 0 , 1
+    canvas.before:
+        Color:
+            rgba: hex('#fff') if self.state == 'normal' else (1, 1, 1, 0.5)
+        Ellipse:
+            pos:self.pos
+            size: 60, 60
+
+<BouttonGris@Button>:
+    font_size: 25
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgba: hex('#2e2b2b') if self.state == 'normal' else (1, 1, 1, 0.5)
+        Ellipse:
+            pos:self.pos
+            size: 60, 60
+
+<BouttonJaune@Button>:
+    font_size: 25
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0.8, 1) if self.state == "normal" else (1, 1, 1, 0.5)
+        Ellipse:
+            pos:self.pos
+            size: 60, 60
+
+<BouttonRectangle@Button>:
+    font_size: 25
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgba: hex('#2e2b2b') if self.state == 'normal' else (1, 1, 1, 0.5)
+        RoundedRectangle:
+            pos:self.pos
+            size: 120, 60
+            radius: [30,]
+
+Calculatrice:
+    id:calculatrice
+    display: input
+    retour: retour
+    orientation: 'vertical'
+
+    GridLayout:
+        orientation: 'lr-tb'
+        size_hint: 1,.15
+        cols: 1
+        rows: 1
+        TextInput:
+            id: input
+            background_color: hex('#00000')
+            foreground_color: 1, 1, 1, 0.5
+            font_size: 25
+            halign: "right"
+
+    GridLayout:
+        orientation: 'lr-tb'
+        size_hint: 1,.15
+        cols: 1
+        rows: 1
+        TextInput:
+            id: retour
+            background_color: hex('#00000')
+            foreground_color: hex('#ffffff')
+            font_size: 30
+            halign: "right"
+
+    GridLayout:
+        orientation: 'lr-tb'
+        cols: 4
+
+        BouttonBlanc:
+            text: 'C'
+            on_press: calculatrice.reinit(input.text), calculatrice.reinit(retour.text)
+
+        BouttonBlanc:
+            text: '+/-'
+            on_press: input.text += self.text
+
+        BouttonBlanc:
+            text: '%'
+            on_press: input.text -= self.text
+
+        BouttonJaune:
+            text: '/'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '7'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '8'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '9'
+            on_press: input.text += self.text
+
+        BouttonJaune:
+            text: '*'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '4'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '5'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '6'
+            on_press: input.text += self.text
+
+        BouttonJaune:
+            text: '-'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '1'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '2'
+            on_press: input.text += self.text
+
+        BouttonGris:
+            text: '3'
+            on_press: input.text += self.text
+
+        BouttonJaune:
+            text: '+'
+            on_press: input.text += self.text
+
+        BouttonRectangle:
+            text: '0'
+            on_press: input.text += self.text
+        
+        Label:
+            
+        BouttonGris:
+            text: ','
+            on_press: input.text += self.text
+
+        BouttonJaune:
+            text: '='
+            on_press: calculatrice.calculer(input.text), calculatrice.calculer(retour.text)
